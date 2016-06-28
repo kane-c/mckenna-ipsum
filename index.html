@@ -14,7 +14,7 @@
   </style>
 </head>
 <body class="container">
-  <h1>Need some fillter text? No worries at all.</h1>
+  <h1>Need some filler text? No worries at all.</h1>
   <form action="" id="form">
     <div class="form-group">
       <label for="paragraphs">Paragraphs</label>
@@ -22,8 +22,8 @@
     </div>
     <div class="form-group">
       <label for="start">
-        <input id="start" type="checkbox" />
-        Start with 'Kimpton ipsum dolor amet...'
+        <input checked="checked" id="start" type="checkbox" />
+        Start with 'Kimpton ipsum dolor sit amet...'
       </label>
     </div>
 
@@ -94,10 +94,14 @@
           sentence = [];
 
           for (k = 0; k < wordsPerSentence; k += 1) {
-            word = getWord();
-
-            while (word === lastWord) {
+            if (start && i === 0 && j === 0 && k === 0) {
+              word = 'Kimpton ipsum dolor sit amet';
+            } else {
               word = getWord();
+
+              while (word === lastWord) {
+                word = getWord();
+              }
             }
 
             lastWord = word;
