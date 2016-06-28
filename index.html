@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>McKenna Ipsum</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+  #output {
+    margin: 1em 0;
+    line-spacing: 1.5;
+    white-space: pre-wrap;
+  }
+  </style>
+</head>
+<body class="container">
+  <h1>Need some fillter text? No worries at all.</h1>
+  <form action="" id="form">
+    <div class="form-group">
+      <label for="paragraphs">Paragraphs</label>
+      <input class="form-control" id="paragraphs" type="number" value="5" />
+    </div>
+    <div class="form-group">
+      <label for="start">
+        <input id="start" type="checkbox" />
+        Start with 'Kimpton ipsum dolor amet...'
+      </label>
+    </div>
+
+    <button class="btn btn-primary" type="submit">
+      Show me some McKenna
+    </button>
+  </form>
+
+  <div id="output"></div>
+
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script>
+  var words = [
+    'Kimpton special',
+    'Christine sends her regards',
+    'operations',
+    'that there',
+    'otherwise that',
+    'happy days',
+    'correct',
+    'AJ Robbo',
+    'good boy',
+    'good girl',
+    'no worries at all',
+    'coffee machine',
+    'no worries there',
+    'it\'s all happening there',
+    'deployment',
+    'excellent there',
+    'procurement',
+    'mail room',
+    'cock ups',
+    'chief operations',
+  ];
+  var wordCount = words.length;
+  var wordsPerSentence = 5;
+  var sentencesPerParagraph = 8;
+
+  function getWord() {
+    return words[Math.floor(Math.random() * wordCount)];
+  }
+
+  $(function () {
+    var $start = $('#start');
+    var $paragraphs = $('#paragraphs');
+    var $output = $('#output');
+
+    $('#form').submit(function (event) {
+      var paragraphCount = parseInt($paragraphs.val(), 10) || 5;
+      var paragraphs = [];
+      var sentences;
+      var sentenceWords;
+      var start = $start.prop('checked');
+      var i;
+      var j;
+      var k;
+      var paragraph;
+      var sentence;
+      var word;
+      var lastWord;
+
+      event.preventDefault();
+
+      for (i = 0; i < paragraphCount; i += 1) {
+        paragraph = [];
+
+        for (j = 0; j < sentencesPerParagraph; j += 1) {
+          sentence = [];
+
+          for (k = 0; k < wordsPerSentence; k += 1) {
+            word = getWord();
+
+            while (word === lastWord) {
+              word = getWord();
+            }
+
+            lastWord = word;
+
+            if (k === 0) {
+              word = word.substr(0, 1).toUpperCase() + word.substr(1);
+            }
+
+            sentence.push(word);
+          }
+
+          paragraph.push(sentence.join(' '));
+        }
+
+        paragraphs.push(paragraph.join('. '));
+      }
+
+      $output.text(paragraphs.join('.\n\n') + '.');
+    });
+  });
+  </script>
+</body>
+</html>
